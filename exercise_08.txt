@@ -1,0 +1,68 @@
+pip -- a tool for installing and uninstalling python packages
+virtual environment -- one separate pip sandbox
+
+1. Preparation
+               a) Open a windows command-line with python in path. This can be either ordinary command-line if you have python in the path globally or a command-line that you run from installed win-python. (See exercise 06.)
+
+               b) Let's see what packages we have installed in the current python by running `pip list`
+                              
+               c) To install a tool for creating virtual environments run `pip install virtualenv`. It is highly probable that you  have it installed already. (There is also a built-in tool `venv` for working with virtual-environments, but I use `virtualenv`.) 
+               
+2. To play safely with packages, we create a new virtual environment.
+               c)  Make some temporary folder, say `d:/tmp` and navigate to it in the command-line.
+               
+               d) Choose a name for our virtual-environment say "venv01" - it should be a valid name for a folder. Now run `virtualenv venv01`. It will create a new virtual-environment. That means it creates a new folder `venv01` with some stuff in it.
+               
+3. activate our new environment
+               e) run `"venv01/scripts/activate"` (Make sure you use the double-quotes "..."). This simply executes a script `activate.bat` located in `venv01/scripts`. Our environment should be active now.
+               
+               f) To see what is installed in our venv01 run `pip list` again. You probably see much fewer packages as when you ran it in b)
+               
+               g) OPTIONAL: check the PATH variable by running `echo %path%`. You see that activating `venv01` has added `D:\tmp\venv01\Scripts;` to path.
+               
+4. You can play in our sandbox. These are some tips what you can try. Feel free to just read them or make your own experiments.
+               h) Run `python` - this starts python console in `venv01` where we have no packages installed.
+               
+               i) in the python-console try `import numpy`. This should fail with `ModuleNotFoundError: No module named 'numpy'`. The same way would fail any python script that imports numpy.
+
+               j) Quit the python console `quit()`. Then install numpy by running `pip install numpy`. If you now run `pip list` you will see `numpy` among the installed packages.
+               
+               k) if you run a python-console, you can now import and use numpy without problems. You can also run scripts that import numpy.
+               
+               l) you can uninstall numpy by calling `pip uninstall numpy`
+               
+               m) You can also pip-install a package from git. For instance try to install my `homework02` package by calling
+                              `pip install git+http://git.tipsport.it/scm/~stefan.sakalos/homework02.git`
+                              You can then try it in python console:
+                              ```
+                              >>> from homework02.ex01.module_01 import f
+                              >>> f(2)
+                              ```
+5. Deactivating the virtual environment.
+               n) run `deactivate` in the console. If you now run `pip list` it should show you the same packages as when we first ran it in b). No damage done to our default Python! :)
+               
+Remark: PyCharm does this virtual-environment dance for you. When you created a new project PyCharm project, it created a new virtual-environment. When you open a new terminal in PyCharm it gives you a windows command-line in which this virtual environment is activated. You can then use this command-line to run your python scripts or use pip to install and uninstall packages.
+
+                              
+6. Making our own pip-installable package
+               o) make sure you have refactored your homework repository to the structure described in "exercise 03". You can use my repository http://git.tipsport.it/scm/~stefan.sakalos/homework02.git as a template.
+               
+               p) Now the only thing I did to make it pip-installable was adding `setup.py`. Copy this file from my repository to yours. Make sure it is located in the top directory. Then open your `setup.py` in an editor and change just `name="homework02"` to the name of your package.
+
+You now have two possibilities for installing your package. Try them both: 
+
+(I) Install the package from the disk
+               q) Create and activate a new virtual-environment. 
+               r) `pip install -e path_to_package` where `path_to_package` is the path to the directory where you `setup.py` is located.
+               s) Check it using `pip list`
+               t) Start python console and try to import your `Bucket` class.
+               
+(II) Install the package from git
+               u) make sure you have committed and pushed your changes in git.
+               v) Create and activate a new virtual-environment. 
+               w) `pip install -e git+link_to_repo` where `link_to_repo` is link you would use if you wanted to clone your repository.
+               x) Check it using `pip list`
+               y) Start python console and try to import your `Bucket` class.
+               
+Remark: I usually make my repository pip-installable very early-on. This way I can pip-install it (from the disk using option (I)) into my virtual-environment in PyCharm. Then I don't have to set the PYTHONPATH in the terminal when running python scripts.
+               

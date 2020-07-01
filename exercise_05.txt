@@ -1,0 +1,39 @@
+Iterables, Iterators and Generators
+
+Read something to understand the above. For instance:
+https://www.datacamp.com/community/tutorials/python-iterator-tutorial
+
+1. To `Bucket` class from exercise 02 add a generator metod `sub_buckets` that iterates through sub-buckets of specified size. That is, the following code:
+```
+bucket =  Bucket(volume=7.5, temperature=10)
+
+for sub_bucket in bucket.sub_buckets(size=2):
+   print(sub_bucket)```
+
+prints the following
+```
+Bucket with volume 2 l and temperature 10 C.
+Bucket with volume 2 l and temperature 10 C.
+Bucket with volume 2 l and temperature 10 C.
+Bucket with volume 1.5 l and temperature 10 C.
+```
+
+2. Turn `Bucket` into an iterable. Iterating through it yields sub-buckets of size 1 liter. 
+Hint: use the `sub_buckets` method.
+
+The test script:
+```
+for i, sub_bucket in enumerate(bucket):
+   print(i, sub_bucket)
+```
+now prints:
+```
+0 Bucket with volume 1 l and temperature 10 C.
+1 Bucket with volume 1 l and temperature 10 C.
+2 Bucket with volume 1 l and temperature 10 C.
+3 Bucket with volume 1 l and temperature 10 C.
+4 Bucket with volume 1 l and temperature 10 C.
+5 Bucket with volume 1 l and temperature 10 C.
+6 Bucket with volume 1 l and temperature 10 C.
+7 Bucket with volume 0.5 l and temperature 10 C.
+```

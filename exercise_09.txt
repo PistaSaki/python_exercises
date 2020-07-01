@@ -1,0 +1,12 @@
+0. To use the current tensorflow 2.1.0 you need to install VisualStudio (community edition is enough):
+https://visualstudio.microsoft.com/downloads/
+
+1. Copy the notebook `tensor_algebra_in_numpy_and_tensorflow.ipynb` to your homework repository.
+
+2. To `requirements.txt` add the following packages jupyter tensorflow numpy
+
+3. install these new requirements to the virtual environment you use. 
+
+4. in that virtual environment, run `jupyter notebook` and browse to the notebook you recently added.
+
+5.  open the notebook and follow the instructions there.

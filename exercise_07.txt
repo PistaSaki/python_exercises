@@ -1,0 +1,19 @@
+Read about context-managers for instance here:
+https://book.pythontips.com/en/latest/context_managers.html
+You can skip the last part: 26.3. Implementing a Context Manager as a Generator
+
+Implement a context-manager `saved_list` that creates an empty list when entering a with-block and automatically saves the content of that list into a json file when exiting the with-block.
+This is a test for that behavior:
+```
+path = Path("d:/tmp.json")
+
+with saved_list(path) as my_list:
+    assert my_list == []
+    my_list.append(1)
+    my_list.append(2)
+
+with open(path, "rt") as f:
+    assert json.load(f) == [1, 2]
+```
+Please implement the `saved_list` first as a class. 
+If you feel like it, implement in again using `contextlib.contextmanager` decorator and a generator as described in https://book.pythontips.com/en/latest/context_managers.html#implementing-a-context-manager-as-a-generator

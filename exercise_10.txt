@@ -1,0 +1,2 @@
+Please copy the notebook `tensorflow without keras.ipynb` to your homework repository. 
+You will need package `tensorflow-probability`. Please pip-install it to your working virtual-environment. I suggest also adding it to the `requirements.txt`. 

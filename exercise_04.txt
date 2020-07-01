@@ -1,0 +1,97 @@
+Decorators.
+
+read about decorators somewhere. For instance here:
+https://www.python-course.eu/python3_decorators.php
+
+1. write a decorator `augment_simple` so that the decorated function returns the result of the original function augmented by 1.
+For instance the following test should pass:
+```
+@augment_simple
+def f():
+    return 5
+
+assert f() == 6
+
+
+@augment
+def g(x, y):
+    return x + y
+
+assert g(1, 2) == 4
+
+
+2. write parametric decorator `augment_param` that increases the result of the function by a specified number `increment`. That is the following test should pass
+
+@augment_param(increment=3)
+def f():
+    return 5
+
+assert f() == 8
+
+
+@augment_param(increment=2)
+def g(x, y):
+    """Add two numbers."""
+    return x + y
+
+assert g(1, 2) == 5
+```
+
+3. bonus implement both of these behaviours simultaneously in a decorator `augment`. That is the following test should pass:
+Hint: https://realpython.com/primer-on-python-decorators/#both-please-but-never-mind-the-bread
+```
+@augment
+def f():
+    return 5
+
+
+assert f() == 6
+
+
+@augment
+def g(x, y):
+    """Add two numbers."""
+    return x + y
+
+
+assert g(1, 2) == 4
+
+
+@augment(increment=3)
+def f():
+    return 5
+
+
+assert f() == 8
+
+
+@augment(increment=2)
+def g(x, y):
+    """Add two numbers."""
+    return x + y
+
+
+assert g(1, 2) == 5
+```
+
+####
+Some remarks:
+You will probably rarely write decorators yourself. But in tensorflow you will use decorator tf.function that is by itself quite confusing, so you will at least understand the decorator part of the confusion.
+
+It is also useful to understand what the decorators are so that you can use them without the decorator syntax. For instance I could write the last test much more concisely as follows:
+```
+def f():
+    return 5
+
+def g(x, y):
+    """Add two numbers."""
+    return x + y
+
+assert augment(f)() == 6
+assert augment(g)(1, 2) == 4
+assert augment(increment=3)(f)() == 8
+assert augment(increment=2)(g)(1, 2) == 5 ```
+
+
+
+

@@ -1,0 +1,30 @@
+PART1: Structure of a python project.
+
+There are more conventions. I will describe mine and your task will be to refactor your homework repository to follow this structure.
+
+homework02
+├───homework02
+    ├───ex01
+    └───ex02
+   
+Make sure that all your folders are python packages -- that is, they contain `__init__.py`. 
+
+PART2: testing
+I use pytest library. Read few words online https://docs.pytest.org/en/latest/index.html
+and then look at my repository http://git.tipsport.it/users/stefan.sakalos/repos/homework02
+I have put all the test files into the `test` folder and I follow the same package structure as in the main package `homework02`. (Actually there is only one test file "Dhomework02\test\ex01\module_01_test.py")
+
+homework02
+├───homework02
+│   ├───ex01
+│   └───ex02
+├───test
+      ├───ex01
+      └───ex02
+
+Now add tests into your own repository following the same structure.  
+
+PART3: Requirements file
+In our project so far we have used only one external library: pytest. It is a good practice to keep track of all the external libraries in requirements.txt.
+Look at requirements.txt in my repository and create a similar file in your own project.
+

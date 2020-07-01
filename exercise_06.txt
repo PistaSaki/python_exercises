@@ -1,0 +1,94 @@
+This is a really tedious homework, but it is useful to have some experience with these unpleasant technicalities. (Unfortunately there will be more of them later.)
+
+Running python in Windows-Command line
+----------------------------------------------------------
+
+1. Watch the first 18 minutes of https://www.youtube.com/watch?v=OdIHeg4jj2c&list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU&index=33
+
+2. If you have WinPython, open the corresponding folder and run ` WinPython Command Prompt.exe`. It will open a console whose system variable PATH contains the correct path to `python.exe` and the python scripts.
+	a) Please, check it by running `echo %PATH%`.
+	b) Check it by running `python` to start the console and then by displaying `sys.executable` as you have seen in the video
+
+3. If you are using PyCharm, open the `Terminal` tab at the bottom. It will open windows command line with activated virtual environment (we will learn about them later). The PATH variable now contains the path to the `scripts` folder of your virtual environment. You can check it again the same way:
+	a) Please, check it by running `echo %PATH%`.
+	b) Check it by running `python` to start the console and then by displaying `sys.executable` as you have seen in the video
+
+4. If you want to have a global python set up on your machine then follow the instructions about setting the PATH variable from the video. Then check it in the default windows command line.
+
+5. Try python console.
+	a) open a windows command-line of your choice with python in PATH.
+	b) run `python`
+	c) play with the console: 
+		i) compute 2**3. 
+		ii)  import `log` from `math` package and compute `log(2)`. This can be useful in everyday life. 
+	d) exit the console by running `quit()`
+
+6. Running python script from command-line.
+	a) Write a simple script `hello.py` that just prints "Hello". You can use the default windows notepad editor for that (so that you see that pycharm is not needed). Save it to a location far from your standard python code. For example `d:/hello.py`
+	b) open a windows command-line of your choice with python in PATH.
+	c) navigate to folder with `hello.py`
+	d) run `python hello.py`
+
+
+
+Where have all the modules gone?
+-----------------------------------------------
+
+7.  Let's see that importing modules usually fails 
+	a) Open windows command-line. Navigate away from your standard python code (say to `d:`). Run a python console (as in 5). 
+	b) `from homework.ex02.bucket import Bucket` (change the package according to your package-structure)
+	c) see that it fails with `ModuleNotFoundError: No module named 'homework'`
+
+8. Problem is that python can not find where your `homework` package is located on the disk. Python looks for the package on locations listed in `sys.path. Let's see it:
+	d) still in the console, import `sys` package and display `sys.path`. You will see several path, none of which contains your `homework` package.
+
+We will see three solutions to this problem. 1 adding to `sys.path` in running python. 2. setting `PYTHONPATH` environment variable. 3. pip installing our package (in a future homework).
+
+
+Adding to `sys.path`
+--------------------------
+	
+9. Solving the problem by adding to `sys.path`:
+	e) Stay in the python console. The `sys.path` is an ordinary python list containing string. We can append to it. Add path to folder containng your `homework` package. by using `sys.path.append(....)`. 
+	f) Now try to import `Bucket` as in b). It should work now. If it does not, check if you have `__init__.py` in the sub-packages. If the problems persist, please contact me.
+	g) try to create a `Bucket` instance and print it.
+
+10. See that `sys.path` is not permanent - it dies with the python.
+	h) quit python console by calling `quit()`
+	i) start new python console `python`
+	j) try importing Bucket - it should fail
+	k) check `sys.path`  to see that it does not contain the path you added previously
+	l) quit the console
+
+11. Now let's do the same in a python script.
+	m) Somewhere far from your usual python code, create new script "hello_bucket_01.py" that imports `Bucket`, creates a new instance and prints it.
+	n) In a windows command line with python, navigate to your script and run it with `python hello_bucket_01.py` 
+	o) This should fail with the `ModuleNotFoundError`
+
+12. Changing `sys.path` in a script. 
+	p) make a copy of  "hello_bucket_01.py" and call it "hello_bucket_02.py"
+	q) in "hello_bucket_02.py", before importing Bucket, import sys and add to `sys.path` as before.
+	 r) Now run `python hello_bucket_02.py` in windows command line. It should work.
+
+While adding to `sys.path` works, I don't recommend to use it. When we add an explicit path in the python program and copy that program to a different location on a different machine it will fail and we would have to change the python code in order to fix it.
+
+
+Setting PYTHONPATH environment variable
+----------------------------------------------------------
+13. In our windows-command line, running `python hello_bucket_01.py` still does not work. we want to fix it without changing the python-code.
+	s) in the windows command-line, write `set PYTHONPATH=....` where ... stands for the path to your package. make sure it does not contain blank spaces and there is no space around `=`. This sets a new environment variable PYTHOMPATH
+	t) display the value of PYTHONPATH by calling `echo %PYTHONPATH%` and check that it contains what you want
+	u) running `python hello_bucket_01.py` should work now.
+
+14. This solution should work also for the console. 
+	v) If you have completed s) and t), run python console in the same windows command-line.
+	w)  check that `sys.path` contains the path to your package
+	x) try importing `Bucket`
+
+Remark: It can happen that you need more packages from different locations. In that case put them all in PYTHONPATH divided by semicolon `;`. Do not use blank spaces.
+	
+15. When working on a python project I usually put `set PYTHONPATH=....` into a bat-file that I run before running my scripts. 
+	y) create a bat file that sets the PYTHONPATH to the root-package of your code
+	z) in a windows command line (for instance in PyCharm terminal), run the bat-file
+	za) in the same command line navigate to some of your test scripts and run them using `python ...`
+	zb) run all the test scripts automatically with `pytest path-to-test-folder` 
