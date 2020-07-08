@@ -4,7 +4,7 @@ b) redefine “__str__” method of Bucket so that if I call “print(b)” I get output
 
 c) Redefine addition in this class so that you can write b3 = b1 + b2 and that corresponds to adding the two buckets of water together.
 
-d) Implement the following behaviour: 
+d) Read about properties in python for instance here https://www.python-course.eu/python3_tests.php. Then implement the following behaviour: 
   i) b.enery will the energy in Joules needed to warm the bucket of volume b.volume to the temperature b.temperature starting from zero C. (Disregard the phase changes solid -> liquid-> gas).
 
   ii) code “b.energy = 10” will set the temperature so that “b.energy == 10”
