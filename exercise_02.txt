@@ -11,7 +11,7 @@ d) Read about properties in python for instance here https://www.python-course.e
 
 e) add method “write_json(path)” that writes bucket to json file.
 
-f) add class-method “Bucket.load_json(path)” that reads a json file and returns a Bucket instance
+f) Read about static methods and class methods for instance here https://stackabuse.com/pythons-classmethod-and-staticmethod-explained/. Then add class-method “Bucket.load_json(path)” that reads a json file and returns a Bucket instance
 
 g) define child class “Cup” that overrides the __str__ method of Bucket
 
